@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -44,6 +46,7 @@ public class HomePag extends javax.swing.JFrame {
     Connection Conn=null;
     PreparedStatement pst=null;
     Statement smt;
+    TimeGenerate timgen = null;
 
     String Patt,riu,thaa,lo,lo2,tbl,sav2,sav3,sed;
     Calendar cal =new GregorianCalendar();
@@ -51,6 +54,9 @@ public class HomePag extends javax.swing.JFrame {
     
     File f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12;
     File ff=new File("MornStock.csv");
+    
+    String day,hours;
+    long daty = Long.valueOf(System.currentTimeMillis());
 
     /**
      * Creates new form HomePag
@@ -58,6 +64,7 @@ public class HomePag extends javax.swing.JFrame {
     public HomePag() {
         initComponents();
         Conn=(Connection) Dbs.InitDb();
+        timgen = new TimeGenerate();
         this.setIconImage(new ImageIcon(getClass().getResource("/Imgs/blobwars.png")).getImage());
         Dimension dim=getToolkit().getScreenSize();
         int jframWidth=this.getSize().width;
@@ -72,12 +79,12 @@ public class HomePag extends javax.swing.JFrame {
     }
 
     private void Alta(){
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Nott.setText(null);
         SysDash.setEnabled(Boolean.FALSE);
         
@@ -88,6 +95,22 @@ public class HomePag extends javax.swing.JFrame {
         Netts();
         CmpDt();
     }
+       
+    public String getTime(){
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        Date resultdate = new Date(daty);
+        hours=sdf1.format(resultdate);
+        
+        return hours;
+    } 
+    
+    public String getDate(){
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy MMM dd");
+        Date resultdate2 = new Date(daty);
+        day=sdf2.format(resultdate2);
+        
+        return day;
+    } 
 
     private void IntOnly(){
         Thread ihinda=new Thread(){
@@ -675,7 +698,7 @@ public class HomePag extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         ProcidLog = new javax.swing.JButton();
-        P1 = new javax.swing.JPanel();
+        Pan_Config = new javax.swing.JPanel();
         Adminey = new javax.swing.JTabbedPane();
         Stocks = new javax.swing.JPanel();
         Stockies = new javax.swing.JTabbedPane();
@@ -854,7 +877,7 @@ public class HomePag extends javax.swing.JFrame {
         jLabel62 = new javax.swing.JLabel();
         ClientCont = new javax.swing.JTextField();
         InsrtImg3 = new javax.swing.JLabel();
-        P2 = new javax.swing.JPanel();
+        Pan_Home = new javax.swing.JPanel();
         Cates = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         RedConsl = new javax.swing.JButton();
@@ -881,7 +904,7 @@ public class HomePag extends javax.swing.JFrame {
         RedMore = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        P3 = new javax.swing.JPanel();
+        Pan_Consult = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel16 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -934,7 +957,7 @@ public class HomePag extends javax.swing.JFrame {
         jLabel61 = new javax.swing.JLabel();
         DDate = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        P4 = new javax.swing.JPanel();
+        Pan_Doctor = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
@@ -977,9 +1000,9 @@ public class HomePag extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        P5 = new javax.swing.JPanel();
+        Pan_Lab = new javax.swing.JPanel();
         jLabel76 = new javax.swing.JLabel();
-        P6 = new javax.swing.JPanel();
+        Pan_OfferDrugs = new javax.swing.JPanel();
         jScrollPane17 = new javax.swing.JScrollPane();
         Medico = new javax.swing.JTextArea();
         jLabel70 = new javax.swing.JLabel();
@@ -1146,15 +1169,15 @@ public class HomePag extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(54, 54, 54)
                 .addComponent(ProcidLog, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        P1.setBackground(new java.awt.Color(204, 204, 204));
-        P1.setMaximumSize(null);
-        P1.setMinimumSize(new java.awt.Dimension(879, 406));
-        P1.setName(""); // NOI18N
-        P1.setPreferredSize(new java.awt.Dimension(879, 406));
-        P1.setRequestFocusEnabled(false);
+        Pan_Config.setBackground(new java.awt.Color(204, 204, 204));
+        Pan_Config.setMaximumSize(null);
+        Pan_Config.setMinimumSize(new java.awt.Dimension(879, 406));
+        Pan_Config.setName(""); // NOI18N
+        Pan_Config.setPreferredSize(new java.awt.Dimension(879, 406));
+        Pan_Config.setRequestFocusEnabled(false);
 
         Adminey.setBackground(new java.awt.Color(228, 232, 201));
         Adminey.setMaximumSize(null);
@@ -1340,10 +1363,10 @@ public class HomePag extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(StockEff, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(StockEff)
+                        .addGap(3, 3, 3))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel11Layout.createSequentialGroup()
@@ -1364,21 +1387,22 @@ public class HomePag extends javax.swing.JFrame {
                                 .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)
                                 .addComponent(StockUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(StockID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(StockUPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(2, 2, 2)
+                                    .addComponent(StockID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                                    .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(StockUPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel63)
                             .addComponent(jLabel64)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                                     .addComponent(jScrollPane15))
                                 .addGap(3, 3, 3))))))
         );
@@ -1407,7 +1431,7 @@ public class HomePag extends javax.swing.JFrame {
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel33)
                             .addComponent(StockUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel75)
                             .addComponent(StockUPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1427,7 +1451,7 @@ public class HomePag extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(StockEff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StockAdd)
                     .addComponent(StockEdit)
@@ -1466,7 +1490,7 @@ public class HomePag extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -2142,7 +2166,7 @@ public class HomePag extends javax.swing.JFrame {
         );
         jPanel32Layout.setVerticalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGap(0, 375, Short.MAX_VALUE)
         );
 
         Others.addTab("Appointment", jPanel32);
@@ -2284,7 +2308,7 @@ public class HomePag extends javax.swing.JFrame {
                 .addComponent(jLabel104, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel105)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
@@ -2705,9 +2729,9 @@ public class HomePag extends javax.swing.JFrame {
                             .addGroup(NwClientLayout.createSequentialGroup()
                                 .addComponent(ClientCont, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NwClientLayout.createSequentialGroup()
                 .addGroup(NwClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2761,20 +2785,20 @@ public class HomePag extends javax.swing.JFrame {
 
         Adminey.addTab("Add Client", NwClient);
 
-        javax.swing.GroupLayout P1Layout = new javax.swing.GroupLayout(P1);
-        P1.setLayout(P1Layout);
-        P1Layout.setHorizontalGroup(
-            P1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Pan_ConfigLayout = new javax.swing.GroupLayout(Pan_Config);
+        Pan_Config.setLayout(Pan_ConfigLayout);
+        Pan_ConfigLayout.setHorizontalGroup(
+            Pan_ConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Adminey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        P1Layout.setVerticalGroup(
-            P1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Pan_ConfigLayout.setVerticalGroup(
+            Pan_ConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Adminey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        P2.setMaximumSize(null);
-        P2.setMinimumSize(new java.awt.Dimension(879, 406));
-        P2.setName(""); // NOI18N
+        Pan_Home.setMaximumSize(null);
+        Pan_Home.setMinimumSize(new java.awt.Dimension(879, 406));
+        Pan_Home.setName(""); // NOI18N
 
         Cates.setBackground(new java.awt.Color(204, 204, 204));
         Cates.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Category To Proceed", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
@@ -3000,13 +3024,13 @@ public class HomePag extends javax.swing.JFrame {
             .addGroup(CatesLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -3023,22 +3047,22 @@ public class HomePag extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout P2Layout = new javax.swing.GroupLayout(P2);
-        P2.setLayout(P2Layout);
-        P2Layout.setHorizontalGroup(
-            P2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Pan_HomeLayout = new javax.swing.GroupLayout(Pan_Home);
+        Pan_Home.setLayout(Pan_HomeLayout);
+        Pan_HomeLayout.setHorizontalGroup(
+            Pan_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Cates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
         );
-        P2Layout.setVerticalGroup(
-            P2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, P2Layout.createSequentialGroup()
+        Pan_HomeLayout.setVerticalGroup(
+            Pan_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pan_HomeLayout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(Cates, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
 
-        P3.setBackground(new java.awt.Color(204, 204, 204));
-        P3.setToolTipText("");
+        Pan_Consult.setBackground(new java.awt.Color(204, 204, 204));
+        Pan_Consult.setToolTipText("");
 
         jTabbedPane1.setBackground(new java.awt.Color(228, 232, 201));
 
@@ -3183,7 +3207,7 @@ public class HomePag extends javax.swing.JFrame {
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -3214,8 +3238,8 @@ public class HomePag extends javax.swing.JFrame {
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(jLabel38)
-                                .addGap(0, 71, Short.MAX_VALUE))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                                .addGap(0, 74, Short.MAX_VALUE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel16Layout.createSequentialGroup()
@@ -3315,7 +3339,7 @@ public class HomePag extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3435,7 +3459,7 @@ public class HomePag extends javax.swing.JFrame {
                                 .addComponent(jLabel51)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3451,21 +3475,21 @@ public class HomePag extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Diagnose", jPanel17);
 
-        javax.swing.GroupLayout P3Layout = new javax.swing.GroupLayout(P3);
-        P3.setLayout(P3Layout);
-        P3Layout.setHorizontalGroup(
-            P3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Pan_ConsultLayout = new javax.swing.GroupLayout(Pan_Consult);
+        Pan_Consult.setLayout(Pan_ConsultLayout);
+        Pan_ConsultLayout.setHorizontalGroup(
+            Pan_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
         );
-        P3Layout.setVerticalGroup(
-            P3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Pan_ConsultLayout.setVerticalGroup(
+            Pan_ConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
         );
 
-        P4.setBackground(new java.awt.Color(204, 204, 204));
-        P4.setMinimumSize(new java.awt.Dimension(947, 425));
-        P4.setName(""); // NOI18N
-        P4.setPreferredSize(new java.awt.Dimension(947, 425));
+        Pan_Doctor.setBackground(new java.awt.Color(204, 204, 204));
+        Pan_Doctor.setMinimumSize(new java.awt.Dimension(947, 425));
+        Pan_Doctor.setName(""); // NOI18N
+        Pan_Doctor.setPreferredSize(new java.awt.Dimension(947, 425));
 
         jTabbedPane2.setBackground(new java.awt.Color(228, 232, 201));
         jTabbedPane2.setMinimumSize(new java.awt.Dimension(947, 425));
@@ -3577,7 +3601,7 @@ public class HomePag extends javax.swing.JFrame {
                     .addComponent(jScrollPane13)
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 201, Short.MAX_VALUE)))
+                        .addGap(0, 214, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
@@ -3586,7 +3610,7 @@ public class HomePag extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Search", jPanel22);
@@ -3682,7 +3706,7 @@ public class HomePag extends javax.swing.JFrame {
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel84)
                     .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder("Logs"));
@@ -3696,7 +3720,7 @@ public class HomePag extends javax.swing.JFrame {
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3797,7 +3821,7 @@ public class HomePag extends javax.swing.JFrame {
                 .addComponent(jRadioButton1)
                 .addGap(33, 33, 33)
                 .addComponent(jRadioButton2)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(458, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3807,36 +3831,36 @@ public class HomePag extends javax.swing.JFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane28, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+                .addComponent(jScrollPane28, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Drugs", jPanel1);
 
-        javax.swing.GroupLayout P4Layout = new javax.swing.GroupLayout(P4);
-        P4.setLayout(P4Layout);
-        P4Layout.setHorizontalGroup(
-            P4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Pan_DoctorLayout = new javax.swing.GroupLayout(Pan_Doctor);
+        Pan_Doctor.setLayout(Pan_DoctorLayout);
+        Pan_DoctorLayout.setHorizontalGroup(
+            Pan_DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        P4Layout.setVerticalGroup(
-            P4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Pan_DoctorLayout.setVerticalGroup(
+            Pan_DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jLabel76.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel76.setText("Lab Section");
 
-        javax.swing.GroupLayout P5Layout = new javax.swing.GroupLayout(P5);
-        P5.setLayout(P5Layout);
-        P5Layout.setHorizontalGroup(
-            P5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
+        javax.swing.GroupLayout Pan_LabLayout = new javax.swing.GroupLayout(Pan_Lab);
+        Pan_Lab.setLayout(Pan_LabLayout);
+        Pan_LabLayout.setHorizontalGroup(
+            Pan_LabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
-        P5Layout.setVerticalGroup(
-            P5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(P5Layout.createSequentialGroup()
+        Pan_LabLayout.setVerticalGroup(
+            Pan_LabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pan_LabLayout.createSequentialGroup()
                 .addComponent(jLabel76, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 390, Short.MAX_VALUE))
+                .addGap(0, 394, Short.MAX_VALUE))
         );
 
         Medico.setEditable(false);
@@ -3947,41 +3971,41 @@ public class HomePag extends javax.swing.JFrame {
 
         Nott.setText("jLabel84");
 
-        javax.swing.GroupLayout P6Layout = new javax.swing.GroupLayout(P6);
-        P6.setLayout(P6Layout);
-        P6Layout.setHorizontalGroup(
-            P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(P6Layout.createSequentialGroup()
+        javax.swing.GroupLayout Pan_OfferDrugsLayout = new javax.swing.GroupLayout(Pan_OfferDrugs);
+        Pan_OfferDrugs.setLayout(Pan_OfferDrugsLayout);
+        Pan_OfferDrugsLayout.setHorizontalGroup(
+            Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(P6Layout.createSequentialGroup()
-                        .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
+                        .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel70)
                             .addComponent(jLabel71)
                             .addComponent(jLabel72))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(P6Layout.createSequentialGroup()
+                        .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                                 .addGap(50, 50, 50)
-                                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(P6Layout.createSequentialGroup()
+                                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                                         .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel74))
                                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel73))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE))
-                            .addGroup(P6Layout.createSequentialGroup()
-                                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(P6Layout.createSequentialGroup()
+                            .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
+                                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                                             .addComponent(Dr1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(36, 36, 36)
                                             .addComponent(DrList))
-                                        .addGroup(P6Layout.createSequentialGroup()
+                                        .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                                             .addComponent(BckDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(WrtFile))
@@ -3993,30 +4017,30 @@ public class HomePag extends javax.swing.JFrame {
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        P6Layout.setVerticalGroup(
-            P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(P6Layout.createSequentialGroup()
+        Pan_OfferDrugsLayout.setVerticalGroup(
+            Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(P6Layout.createSequentialGroup()
+                    .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
                         .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(DrList)
-                            .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel70)
                                 .addComponent(Dr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(P6Layout.createSequentialGroup()
-                                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Pan_OfferDrugsLayout.createSequentialGroup()
+                                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel74)
                                     .addComponent(jLabel71))
                                 .addGap(18, 18, 18)
-                                .addGroup(P6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(Pan_OfferDrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel72)
                                     .addComponent(jLabel73))
@@ -4027,7 +4051,7 @@ public class HomePag extends javax.swing.JFrame {
                             .addComponent(WrtFile))
                         .addGap(18, 18, 18)
                         .addComponent(Nott)
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -4039,19 +4063,19 @@ public class HomePag extends javax.swing.JFrame {
                 .addComponent(Plogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Plogic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 93, Short.MAX_VALUE))
+                .addGap(0, 106, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE))
+                .addComponent(Pan_Config, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Consult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Doctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Lab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_OfferDrugs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CentaLayout.setVerticalGroup(
             CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4061,19 +4085,19 @@ public class HomePag extends javax.swing.JFrame {
                 .addComponent(Plogic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE))
+                .addComponent(Pan_Config, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CentaLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(P2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Pan_Home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Consult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Doctor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_Lab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(P6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Pan_OfferDrugs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(Centa, java.awt.BorderLayout.CENTER);
@@ -4082,11 +4106,11 @@ public class HomePag extends javax.swing.JFrame {
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText("Clinician Macharia");
+        jLabel37.setText("Someone Here");
 
         jLabel40.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("AnCharia Medical Care");
+        jLabel40.setText("Specific Here");
 
         SysLgut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/system-shutdown-3.png"))); // NOI18N
         SysLgut.setToolTipText("Log Out");
@@ -4108,7 +4132,7 @@ public class HomePag extends javax.swing.JFrame {
         Heda.setLayout(HedaLayout);
         HedaLayout.setHorizontalGroup(
             HedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
+            .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
             .addGroup(HedaLayout.createSequentialGroup()
                 .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -4134,7 +4158,7 @@ public class HomePag extends javax.swing.JFrame {
         Pano.setPreferredSize(new java.awt.Dimension(879, 60));
 
         jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel67.setText("Ancharia Hospital");
+        jLabel67.setText("Specific Here");
 
         jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel68.setText("Contact Developers");
@@ -4146,7 +4170,7 @@ public class HomePag extends javax.swing.JFrame {
         Pano.setLayout(PanoLayout);
         PanoLayout.setHorizontalGroup(
             PanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
             .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -4182,14 +4206,14 @@ public class HomePag extends javax.swing.JFrame {
                 stats=1;
                 if (LogLev.getSelectedIndex()==1) {
                     lvpr=1;
-                    P1.setVisible(Boolean.FALSE);
+                    Pan_Config.setVisible(Boolean.FALSE);
                     Plogo.setVisible(Boolean.FALSE);
                     Plogic.setVisible(Boolean.FALSE);
-                    P2.setVisible(Boolean.TRUE);
-                    P3.setVisible(Boolean.FALSE);
-                    P4.setVisible(Boolean.FALSE);
-                    P5.setVisible(Boolean.FALSE);
-                    P6.setVisible(Boolean.FALSE);
+                    Pan_Home.setVisible(Boolean.TRUE);
+                    Pan_Consult.setVisible(Boolean.FALSE);
+                    Pan_Doctor.setVisible(Boolean.FALSE);
+                    Pan_Lab.setVisible(Boolean.FALSE);
+                    Pan_OfferDrugs.setVisible(Boolean.FALSE);
                     
                     RedConsl.setEnabled(Boolean.TRUE);
                     RedInj.setEnabled(Boolean.TRUE);
@@ -4199,14 +4223,14 @@ public class HomePag extends javax.swing.JFrame {
                 }
                 if (LogLev.getSelectedIndex()==2) {
                     lvpr=2;
-                    P2.setVisible(Boolean.FALSE);
+                    Pan_Home.setVisible(Boolean.FALSE);
                     Plogo.setVisible(Boolean.FALSE);
                     Plogic.setVisible(Boolean.FALSE);
-                    P1.setVisible(Boolean.FALSE);
-                    P3.setVisible(Boolean.TRUE);
-                    P4.setVisible(Boolean.FALSE);
-                    P5.setVisible(Boolean.FALSE);
-                    P6.setVisible(Boolean.FALSE);
+                    Pan_Config.setVisible(Boolean.FALSE);
+                    Pan_Consult.setVisible(Boolean.TRUE);
+                    Pan_Doctor.setVisible(Boolean.FALSE);
+                    Pan_Lab.setVisible(Boolean.FALSE);
+                    Pan_OfferDrugs.setVisible(Boolean.FALSE);
                     
                     RedConsl.setEnabled(Boolean.TRUE);
                     RedInj.setEnabled(Boolean.FALSE);
@@ -4216,14 +4240,14 @@ public class HomePag extends javax.swing.JFrame {
                 }
                 if (LogLev.getSelectedIndex()==3) {
                     lvpr=3;
-                    P2.setVisible(Boolean.FALSE);
+                    Pan_Home.setVisible(Boolean.FALSE);
                     Plogo.setVisible(Boolean.FALSE);
                     Plogic.setVisible(Boolean.FALSE);
-                    P1.setVisible(Boolean.FALSE);
-                    P3.setVisible(Boolean.FALSE);
-                    P4.setVisible(Boolean.TRUE);
-                    P5.setVisible(Boolean.FALSE);
-                    P6.setVisible(Boolean.FALSE);
+                    Pan_Config.setVisible(Boolean.FALSE);
+                    Pan_Consult.setVisible(Boolean.FALSE);
+                    Pan_Doctor.setVisible(Boolean.TRUE);
+                    Pan_Lab.setVisible(Boolean.FALSE);
+                    Pan_OfferDrugs.setVisible(Boolean.FALSE);
                     
                     RedConsl.setEnabled(Boolean.FALSE);
                     RedInj.setEnabled(Boolean.FALSE);
@@ -4241,36 +4265,36 @@ public class HomePag extends javax.swing.JFrame {
 
     private void RedConslActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedConslActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.TRUE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.TRUE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_RedConslActionPerformed
 
     private void Bck2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bck2ActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.TRUE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.TRUE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_Bck2ActionPerformed
 
     private void Bck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bck1ActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.TRUE);
         Plogic.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_Bck1ActionPerformed
@@ -4294,26 +4318,26 @@ public class HomePag extends javax.swing.JFrame {
 
     private void RedLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedLabActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.TRUE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.TRUE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_RedLabActionPerformed
 
     private void RedMoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedMoreActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.TRUE);
+        Pan_Config.setVisible(Boolean.TRUE);
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_RedMoreActionPerformed
 
     private void InsrtImg1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InsrtImg1MouseClicked
@@ -4393,8 +4417,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Added New Staff");
                 pst.setString(4, "True");
                 
@@ -4414,16 +4438,24 @@ public class HomePag extends javax.swing.JFrame {
     }//GEN-LAST:event_NwUsrActionPerformed
 
     private void StockAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockAddActionPerformed
-        // TODO add your handling code here:
-        Conn=(Connection) Dbs.InitDb();
-        IntOnly();
+        // TODO add your handling code here:      
+        long daty = Long.valueOf(System.currentTimeMillis());
+        
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        Date resultdate = new Date(daty);
+        hours=sdf1.format(resultdate);
+        
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy MMM dd");
+        Date resultdate2 = new Date(daty);
+        day=sdf2.format(resultdate2);
+        
         try {
             String Kret="INSERT INTO `tbl_Stock` (`Count`,`Name` ,`StockDate` ,`StockTime` ,`Company` ,`Unit` ,`UnitPrice`,`StockID` ,`StockDesc` ,`StockScope`,`SideEffect` ) VALUES (NULL,?,?,?,?,?,?,?,?,?,?)";
             pst= (PreparedStatement) Conn.prepareStatement(Kret);
 
             pst.setString(1, StockNm.getText().toString());
-            pst.setString(2, StockDt.getText().toString());
-            pst.setString(3, StockTm.getText().toString());
+            pst.setString(2, day);
+            pst.setString(3, hours);
             pst.setString(4, StockComp.getText().toString());
             pst.setString(5, StockUnit.getText().toString());
             pst.setString(6, StockUPrice.getText().toString());
@@ -4449,7 +4481,7 @@ public class HomePag extends javax.swing.JFrame {
                 pst.setString(1, StockNm.getText().toString());
                 pst.setString(2, StockID.getText().toString());
                 pst.setInt(3, 0);
-                pst.setString(4, riu);
+                pst.setString(4, day);
                 
                 pst.executeUpdate();
 
@@ -4457,8 +4489,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Stock Refill");
                 pst.setString(4, "True");
                 
@@ -4472,8 +4504,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "New Stock Registered");
                 pst.setString(4, "True");
                 
@@ -4505,13 +4537,24 @@ public class HomePag extends javax.swing.JFrame {
 
     private void StockEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockEditActionPerformed
         // TODO add your handling code here:
+        
+        long daty = Long.valueOf(System.currentTimeMillis());
+        
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        Date resultdate = new Date(daty);
+        hours=sdf1.format(resultdate);
+        
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy MMM dd");
+        Date resultdate2 = new Date(daty);
+        day=sdf2.format(resultdate);
+        
         try {
             int ro=StockList.getSelectedRow();
             String cc=StockList.getModel().getValueAt(ro, 0).toString();
             
             String snm = StockNm.getText().toString();
-            String scdt = StockDt.getText().toString();
-            String sctm = StockTm.getText().toString();
+            String scdt = day;
+            String sctm = hours;
             String scom = StockComp.getText().toString();
             String scun = StockUnit.getText().toString();
             String scup = StockUPrice.getText().toString();
@@ -4530,8 +4573,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Stock Editting");
                 pst.setString(4, "True");
                 
@@ -4561,8 +4604,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Stock Deleted");
                 pst.setString(4, "True");
                 
@@ -4570,9 +4613,11 @@ public class HomePag extends javax.swing.JFrame {
 
             } catch (Exception e) {
                 Toolkit.getDefaultToolkit().beep();
+                System.out.println("StockDelActionPerformed insert"+e.getMessage());
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "\nDeleting The Selected Stock Element Has Exited Due To An Error");
+            System.out.println("StockDelActionPerformed "+e.getMessage());
         }
         Poplt();
     }//GEN-LAST:event_StockDelActionPerformed
@@ -4600,8 +4645,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Added New Client");
                 pst.setString(4, "True");
                 
@@ -4857,8 +4902,8 @@ public class HomePag extends javax.swing.JFrame {
             try {
                 String lv="INSERT INTO `tbl_Logs` ( `Count`,`Date`,`Time`,`Username`,`Action`,`Correct` ) VALUES (NULL,?,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, Usrnm.getText().toString());
                 pst.setString(4, "Treat Patient");
                 pst.setString(5, "True");
@@ -4923,8 +4968,8 @@ public class HomePag extends javax.swing.JFrame {
         try {
                 String lv="INSERT INTO `tbl_Logs` ( `Count`,`Date`,`Time`,`Username`,`Action`,`Correct` ) VALUES (NULL,?,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, Usrnm.getText().toString());
                 pst.setString(4, "Prescribe Drugs");
                 pst.setString(5, "True");
@@ -4960,24 +5005,24 @@ public class HomePag extends javax.swing.JFrame {
         // TODO add your handling code here:
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.TRUE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_ClieMedMouseClicked
 
     private void BckDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BckDocActionPerformed
         // TODO add your handling code here:
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.TRUE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.TRUE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_BckDocActionPerformed
 
     private void Dr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dr1ActionPerformed
@@ -5026,24 +5071,24 @@ public class HomePag extends javax.swing.JFrame {
 
     private void RedPharmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedPharmActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.TRUE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.TRUE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.FALSE);
         Plogic.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_RedPharmActionPerformed
 
     private void Bck3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bck3ActionPerformed
         // TODO add your handling code here:
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Plogo.setVisible(Boolean.TRUE);
         Plogic.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_Bck3ActionPerformed
@@ -5278,9 +5323,8 @@ public class HomePag extends javax.swing.JFrame {
             try {
                 String lv1="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv1);
-                IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Staff Updated");
                 pst.setString(4, "True");
                 
@@ -5310,8 +5354,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Staff Deleted");
                 pst.setString(4, "True");
                 
@@ -5339,8 +5383,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Client Deleted");
                 pst.setString(4, "True");
                 
@@ -5378,8 +5422,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Client Update");
                 pst.setString(4, "True");
                 
@@ -5473,12 +5517,12 @@ public class HomePag extends javax.swing.JFrame {
         // TODO add your handling code here:
         Plogo.setVisible(Boolean.TRUE);
         Plogic.setVisible(Boolean.TRUE);
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_Bck10MouseClicked
 
     private void StatAssesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatAssesActionPerformed
@@ -5559,6 +5603,16 @@ public class HomePag extends javax.swing.JFrame {
 
     private void RfADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RfADDActionPerformed
         // TODO add your handling code here:
+        long daty = Long.valueOf(System.currentTimeMillis());
+        
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        Date resultdate = new Date(daty);
+        hours=sdf1.format(resultdate);
+        
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy MMM dd");
+        Date resultdate2 = new Date(daty);
+        day=sdf2.format(resultdate);
+        
         try {
             String sav="UPDATE `tbl_StockLevel` SET `Avail` = '"+RfNwLv.getText()+"' WHERE `StockID`= '"+Integer.parseInt(RfStckID.getText().toString())+"' ";
             
@@ -5569,8 +5623,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Stock Refill");
                 pst.setString(4, "True");
                 
@@ -5922,8 +5976,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Admine` ( `Count`,`AcDate`,`AcTime`,`Task`,`Output` ) VALUES (NULL,?,?,?,?)";
                 pst=(PreparedStatement) Conn.prepareStatement(lv);
                 IntOnly();
-                pst.setString(1, riu);
-                pst.setString(2, thaa);
+                pst.setString(1, day);
+                pst.setString(2, hours);
                 pst.setString(3, "Created Backup");
                 pst.setString(4, "True");
                 
@@ -5987,12 +6041,12 @@ public class HomePag extends javax.swing.JFrame {
         lvpr=0;
         Plogo.setVisible(Boolean.TRUE);
         Plogic.setVisible(Boolean.TRUE);
-        P1.setVisible(Boolean.FALSE);
-        P2.setVisible(Boolean.FALSE);
-        P3.setVisible(Boolean.FALSE);
-        P4.setVisible(Boolean.FALSE);
-        P5.setVisible(Boolean.FALSE);
-        P6.setVisible(Boolean.FALSE);
+        Pan_Config.setVisible(Boolean.FALSE);
+        Pan_Home.setVisible(Boolean.FALSE);
+        Pan_Consult.setVisible(Boolean.FALSE);
+        Pan_Doctor.setVisible(Boolean.FALSE);
+        Pan_Lab.setVisible(Boolean.FALSE);
+        Pan_OfferDrugs.setVisible(Boolean.FALSE);
         Tara();
     }//GEN-LAST:event_SysLgutMouseClicked
 
@@ -6001,12 +6055,12 @@ public class HomePag extends javax.swing.JFrame {
         if (stats==1) {
             Plogo.setVisible(Boolean.FALSE);
             Plogic.setVisible(Boolean.FALSE);
-            P1.setVisible(Boolean.FALSE);
-            P2.setVisible(Boolean.TRUE);
-            P3.setVisible(Boolean.FALSE);
-            P4.setVisible(Boolean.FALSE);
-            P5.setVisible(Boolean.FALSE);
-            P6.setVisible(Boolean.FALSE);
+            Pan_Config.setVisible(Boolean.FALSE);
+            Pan_Home.setVisible(Boolean.TRUE);
+            Pan_Consult.setVisible(Boolean.FALSE);
+            Pan_Doctor.setVisible(Boolean.FALSE);
+            Pan_Lab.setVisible(Boolean.FALSE);
+            Pan_OfferDrugs.setVisible(Boolean.FALSE);
             
             if (lvpr==1) {
                 RedConsl.setEnabled(Boolean.TRUE);
@@ -6140,12 +6194,12 @@ public class HomePag extends javax.swing.JFrame {
     private javax.swing.JButton NwUsr;
     private javax.swing.JPanel Otherrs;
     private javax.swing.JTabbedPane Others;
-    private javax.swing.JPanel P1;
-    private javax.swing.JPanel P2;
-    private javax.swing.JPanel P3;
-    private javax.swing.JPanel P4;
-    private javax.swing.JPanel P5;
-    private javax.swing.JPanel P6;
+    private javax.swing.JPanel Pan_Config;
+    private javax.swing.JPanel Pan_Consult;
+    private javax.swing.JPanel Pan_Doctor;
+    private javax.swing.JPanel Pan_Home;
+    private javax.swing.JPanel Pan_Lab;
+    private javax.swing.JPanel Pan_OfferDrugs;
     private javax.swing.JPanel Pano;
     private javax.swing.JTextField PharmSerchID;
     private javax.swing.JButton PharmTerm;

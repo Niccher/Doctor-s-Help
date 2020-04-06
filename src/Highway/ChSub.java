@@ -28,7 +28,7 @@ public class ChSub {
         int serverPort = 4142;
 
             try {
-                InetAddress inetAdd = InetAddress.getByName("192.168.42.14");
+                InetAddress inetAdd = InetAddress.getByName("localhost");
                 Socket socket = new Socket(inetAdd, serverPort);
 
                 InputStream in = socket.getInputStream();

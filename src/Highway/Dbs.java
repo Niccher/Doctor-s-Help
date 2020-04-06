@@ -44,23 +44,23 @@ public class Dbs {
                PreparedStatement pst3 = conn.prepareStatement(Std3);
                pst3.execute();
                
-               String Std4 = "CREATE TABLE IF NOT EXISTS `tbl_Stock` ( `Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(10) NOT NULL , `StockDate` VARCHAR(10) NOT NULL ,`StockTime` VARCHAR(10) NOT NULL ,`Company` VARCHAR(20) NOT NULL,`Unit` VARCHAR(20) NOT NULL,`UnitPrice` INT(5) NOT NULL,`StockID` INT(10) NOT NULL,`StockDesc` VARCHAR(40) NOT NULL ,`StockScope` VARCHAR(25) NOT NULL,`SideEffect` VARCHAR(25) NOT NULL)";
+               String Std4 = "CREATE TABLE IF NOT EXISTS `tbl_Stock` ( `Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(10) NOT NULL , `StockDate` VARCHAR(16) NOT NULL ,`StockTime` VARCHAR(10) NOT NULL ,`Company` VARCHAR(20) NOT NULL,`Unit` VARCHAR(20) NOT NULL,`UnitPrice` INT(5) NOT NULL,`StockID` INT(10) NOT NULL,`StockDesc` VARCHAR(40) NOT NULL ,`StockScope` VARCHAR(25) NOT NULL,`SideEffect` VARCHAR(25) NOT NULL)";
                PreparedStatement pst4 = conn.prepareStatement(Std4);
                pst4.execute();
                
-               String Std5 = "CREATE TABLE IF NOT EXISTS `tbl_Logs` ( `Count` INT AUTO_INCREMENT UNIQUE, `Date` VARCHAR(10) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`Username` VARCHAR(20) NOT NULL ,`Action` VARCHAR(50)  NOT NULL ,`Correct` VARCHAR(10) NOT NULL)";
+               String Std5 = "CREATE TABLE IF NOT EXISTS `tbl_Logs` ( `Count` INT AUTO_INCREMENT UNIQUE, `Date` VARCHAR(16) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`Username` VARCHAR(20) NOT NULL ,`Action` VARCHAR(50)  NOT NULL ,`Correct` VARCHAR(10) NOT NULL)";
                PreparedStatement pst5 = conn.prepareStatement(Std5);
                pst5.execute();
                
-               String Std6 = "CREATE TABLE IF NOT EXISTS `tbl_Admine` ( `Count` INT AUTO_INCREMENT UNIQUE, `AcDate` VARCHAR(10) NOT NULL ,`AcTime` VARCHAR(10) NOT NULL ,`Task` VARCHAR(30) NOT NULL ,`Output` VARCHAR(10)  NOT NULL)";
+               String Std6 = "CREATE TABLE IF NOT EXISTS `tbl_Admine` ( `Count` INT AUTO_INCREMENT UNIQUE, `AcDate` VARCHAR(16) NOT NULL ,`AcTime` VARCHAR(16) NOT NULL ,`Task` VARCHAR(30) NOT NULL ,`Output` VARCHAR(10)  NOT NULL)";
                PreparedStatement pst6 = conn.prepareStatement(Std6);
                pst6.execute();
                
-               String Std7 = "CREATE TABLE IF NOT EXISTS `tbl_Treats` (`Count` INT AUTO_INCREMENT UNIQUE ,`Name` VARCHAR(20) NOT NULL ,`NationalID`  VARCHAR(20) NOT NULL ,`ClientID` INT(10) NOT NULL ,`Date` VARCHAR(10) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`Conditn` VARCHAR(30) NOT NULL ,`Diagnosis` VARCHAR(30) NOT NULL ,`Lab` VARCHAR(30) NOT NULL ,`Drugs`  VARCHAR(255) NOT NULL )";
+               String Std7 = "CREATE TABLE IF NOT EXISTS `tbl_Treats` (`Count` INT AUTO_INCREMENT UNIQUE ,`Name` VARCHAR(20) NOT NULL ,`NationalID`  VARCHAR(20) NOT NULL ,`ClientID` INT(10) NOT NULL ,`Date` VARCHAR(16) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`Conditn` VARCHAR(30) NOT NULL ,`Diagnosis` VARCHAR(30) NOT NULL ,`Lab` VARCHAR(30) NOT NULL ,`Drugs`  VARCHAR(255) NOT NULL )";
                PreparedStatement pst7 = conn.prepareStatement(Std7);
                pst7.execute();
                
-               String Std8 = "CREATE TABLE IF NOT EXISTS `tbl_Drugs`  (`Count` INT AUTO_INCREMENT UNIQUE ,`ClientID` INT(10) NOT NULL ,`Date` VARCHAR(10) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`StockID` INT(10) NOT NULL ,`Drug` VARCHAR(30) NOT NULL ,`Dosage` VARCHAR(4) NOT NULL ,`Duration`  INT(2) NOT NULL )";
+               String Std8 = "CREATE TABLE IF NOT EXISTS `tbl_Drugs`  (`Count` INT AUTO_INCREMENT UNIQUE ,`ClientID` INT(10) NOT NULL ,`Date` VARCHAR(16) NOT NULL ,`Time` VARCHAR(10) NOT NULL ,`StockID` INT(10) NOT NULL ,`Drug` VARCHAR(30) NOT NULL ,`Dosage` VARCHAR(4) NOT NULL ,`Duration`  INT(2) NOT NULL )";
                PreparedStatement pst8 = conn.prepareStatement(Std8);
                pst8.execute();
                
