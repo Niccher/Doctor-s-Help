@@ -23,6 +23,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -216,13 +217,21 @@ public class HomePag extends javax.swing.JFrame {
     }
     
     private void DrgInsrt(){
-        int sec2,min2,hr2,drgcount=0
-                ;
-        sec2=cal.get(Calendar.SECOND);
-        min2=cal.get(Calendar.MINUTE);
-        hr2=cal.get(Calendar.HOUR_OF_DAY);
         
-        thaa= hr2+":"+min2+":"+sec2;
+        Drugs dr = new Drugs();
+        
+        
+        long daty = Long.valueOf(System.currentTimeMillis());
+        
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        Date resultdate = new Date(daty);
+        hours=sdf1.format(resultdate);
+        
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy MMM dd");
+        Date resultdate2 = new Date(daty);
+        day=sdf2.format(resultdate2);
+        
+        int drgcount=0;
         
         int ci=Integer.parseInt(ClienID.getText().toString());
         int dy=Integer.parseInt(b1.getText().toString());
@@ -242,8 +251,8 @@ public class HomePag extends javax.swing.JFrame {
                 String lv="INSERT INTO `tbl_Drugs` (Count,`ClientID`,`Date`,`Time`,`StockID`,`Drug`,`Dosage`,`Duration`) VALUES (NULL,?,?,?,?,?,?,?)";
                 pst= (PreparedStatement) Conn.prepareStatement(lv);
                 pst.setInt(1, ci);
-                pst.setString(2, riu);
-                pst.setString(3, thaa);
+                pst.setString(2, day);
+                pst.setString(3, hours);
                 pst.setInt(4, d5);
                 pst.setString(5, drg);
                 pst.setString(6, dos);
@@ -3874,7 +3883,7 @@ public class HomePag extends javax.swing.JFrame {
         });
         jScrollPane17.setViewportView(Medico);
 
-        jLabel70.setText("Name");
+        jLabel70.setText("Medicine");
 
         jLabel71.setText("Dosage");
 
@@ -3924,16 +3933,11 @@ public class HomePag extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addComponent(jScrollPane18)
-                .addContainerGap())
+            .addComponent(jScrollPane18)
         );
 
         BckDoc.setText("Back");
@@ -4051,7 +4055,7 @@ public class HomePag extends javax.swing.JFrame {
                             .addComponent(WrtFile))
                         .addGap(18, 18, 18)
                         .addComponent(Nott)
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 16, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -5027,10 +5031,20 @@ public class HomePag extends javax.swing.JFrame {
 
     private void Dr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dr1ActionPerformed
         // TODO add your handling code here:
+        Drugs dr = new Drugs();
+                
         Medico.setText("Description\t<Here>"+"\nDrug Scope\t<Here>"+"\nSide"
                 + " Effects\t<Here>");
         
-        String nmm=Dr1.getSelectedItem().toString();
+        //String nmm=Dr1.getSelectedItem().toString();
+        Dr1.removeAllItems();
+        
+        ArrayList<String> druglisting= new ArrayList<String>();
+        druglisting=dr.DrugList();
+        
+        for (int i = 0; i < druglisting.size(); i++) {
+            Dr1.addItem(druglisting.get(i));
+        }
     }//GEN-LAST:event_Dr1ActionPerformed
 
     private void DrListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DrListMouseClicked
@@ -5201,7 +5215,7 @@ public class HomePag extends javax.swing.JFrame {
 
     private void Dr1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Dr1MouseEntered
         // TODO add your handling code here:
-        try {
+        /*try {
             String cops4= "SELECT * FROM `tbl_Stock`";
             pst = ((PreparedStatement)Conn.prepareStatement(cops4));
             rs = pst.executeQuery();
@@ -5215,7 +5229,7 @@ public class HomePag extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e+"\nME error");
-        }
+        }*/
     }//GEN-LAST:event_Dr1MouseEntered
 
     private void StaffIDNo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StaffIDNo1KeyTyped
@@ -6061,6 +6075,23 @@ public class HomePag extends javax.swing.JFrame {
             Pan_Doctor.setVisible(Boolean.FALSE);
             Pan_Lab.setVisible(Boolean.FALSE);
             Pan_OfferDrugs.setVisible(Boolean.FALSE);
+            
+//            Pan_Config.removeAll();
+//            Pan_Config.removeAll();
+//            Pan_Home.removeAll();
+//            Pan_Consult.removeAll();
+//            Pan_Doctor.removeAll();
+//            Pan_Lab.removeAll();
+//            Pan_OfferDrugs.removeAll();
+//            Pan_Lab.removeAll();
+            
+            Pan_Config.updateUI();
+            Pan_Home.updateUI();
+            Pan_Consult.updateUI();
+            Pan_Doctor.repaint();
+            Pan_Lab.repaint();
+            Pan_OfferDrugs.updateUI();
+            Pan_Lab.updateUI();
             
             if (lvpr==1) {
                 RedConsl.setEnabled(Boolean.TRUE);
