@@ -1,11 +1,19 @@
 pipeline {
 agent none
   stages {
+    stage("Cloning") {
+    agent any
+      steps {
+        sh 'Echo first run'
+      }
+    }
+  }
+stages {
     stage("build & SonarQube Scanner") {
     agent any
       steps {
       withSonarQubeEnv('SonarQ_installation') {
-      sh 'mvn clean package sonar:sonar'
+        sh 'Echo second run'
       }
       }
     }
