@@ -7,7 +7,6 @@ agent none
         sh 'Echo first run'
       }
     }
-  }
   stage("SonarQube Scanner") {
       agent any
         steps {
@@ -16,4 +15,6 @@ agent none
         }
         }
       }
+  }
+  
 }
