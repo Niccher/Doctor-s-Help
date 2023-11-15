@@ -4,14 +4,14 @@ agent none
     stage("Cloning") {
     agent any
       steps {
-        sh 'Echo first run'
+        sh 'echo first run'
       }
     }
   stage("SonarQube Scanner") {
       agent any
         steps {
         withSonarQubeEnv('SonarQ_installation') {
-          sh 'Echo second run'
+          sh 'echo second run'
         }
         }
       }
