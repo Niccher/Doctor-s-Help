@@ -8,14 +8,12 @@ agent none
       }
     }
   }
-stages {
-    stage("build & SonarQube Scanner") {
-    agent any
-      steps {
-      withSonarQubeEnv('SonarQ_installation') {
-        sh 'Echo second run'
+  stage("SonarQube Scanner") {
+      agent any
+        steps {
+        withSonarQubeEnv('SonarQ_installation') {
+          sh 'Echo second run'
+        }
+        }
       }
-      }
-    }
-  }
 }
